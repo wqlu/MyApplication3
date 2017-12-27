@@ -1,0 +1,21 @@
+package com.example.lu.myapplication;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+public class StreamTool {
+    public static byte[] getNetImage(InputStream inStream) throws Exception {
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+
+        // 读取到流的末尾，返回-1
+        // 这里为只要还没有读到流的末尾，就一直往内存中输出二进制数据
+        while ((len = inStream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, len);
+        }
+        inStream.close();
+        return outStream.toByteArray();
+    }
+}
